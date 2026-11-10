@@ -1,0 +1,282 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: var(--font-fraunces), "Iowan Old Style", "Palatino Linotype",
+    Georgia, serif;
+  --font-sans: var(--font-karla), "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --color-cream: #faf5ea;
+  --color-bone: #f1e7d5;
+  --color-sand: #e3d5bd;
+  --color-pine: #0b2b23;
+  --color-pine-soft: #16483b;
+  --color-pine-mist: #dce6da;
+  --color-sage: #b9c7ae;
+  --color-sage-deep: #7f9578;
+  --color-clay: #a34f2f;
+  --color-clay-dark: #8a3f26;
+  --color-gold: #d5a04a;
+  --color-ink: #14231d;
+  --color-muted: #5b675f;
+  --color-line: #d9cdb8;
+
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 42s linear infinite;
+  --animate-float: float 10s ease-in-out infinite;
+  --animate-float-slow: float 15s ease-in-out infinite;
+  --animate-spin-slow: spin 32s linear infinite;
+  --animate-shimmer: shimmer 3.5s ease-in-out infinite;
+  --animate-accordion-down: accordion-down 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-accordion-up: accordion-up 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-overlay-in: overlay-in 260ms ease-out;
+  --animate-overlay-out: overlay-out 200ms ease-in;
+  --animate-dialog-in: dialog-in 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-dialog-out: dialog-out 220ms cubic-bezier(0.4, 0, 1, 1);
+  --animate-menu-in: menu-in 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-menu-out: menu-out 260ms cubic-bezier(0.4, 0, 1, 1);
+
+  @keyframes menu-in {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes menu-out {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  @keyframes overlay-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes overlay-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes dialog-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -46%) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  @keyframes dialog-out {
+    from {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translate(-50%, -48%) scale(0.97);
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marquee-reverse {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -14px, 0);
+    }
+  }
+
+  @keyframes shimmer {
+    0%,
+    100% {
+      opacity: 0.45;
+    }
+    50% {
+      opacity: 0.9;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+  }
+
+  ::selection {
+    background-color: var(--color-clay);
+    color: var(--color-cream);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-clay);
+    outline-offset: 4px;
+  }
+
+  input,
+  textarea,
+  button,
+  select {
+    font: inherit;
+  }
+}
+
+@layer components {
+  .grain {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.055;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+  }
+
+  .grain-dark::after {
+    opacity: 0.11;
+    mix-blend-mode: screen;
+  }
+
+  .glass {
+    background-color: color-mix(in oklab, var(--color-cream) 76%, transparent);
+    backdrop-filter: blur(16px) saturate(1.15);
+    -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  }
+
+  .glass-dark {
+    background-color: color-mix(in oklab, var(--color-pine) 72%, transparent);
+    backdrop-filter: blur(18px) saturate(1.1);
+    -webkit-backdrop-filter: blur(18px) saturate(1.1);
+  }
+
+  .hairline {
+    border-color: color-mix(in oklab, var(--color-ink) 14%, transparent);
+  }
+
+  .hairline-light {
+    border-color: color-mix(in oklab, var(--color-cream) 20%, transparent);
+  }
+
+  .arch {
+    border-radius: 999px 999px 28px 28px;
+  }
+
+  .arch-sm {
+    border-radius: 999px 999px 18px 18px;
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  .hide-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
